@@ -68,6 +68,8 @@ class Replacer:
 
     def replace_on_index(self, text, index_to_expr): # replace the words on the indices
 
+        indices, expressions = zip(*index_to_expr.items())
+
         if not index_to_expr:
             return text
 
@@ -120,7 +122,7 @@ class Replacer:
         indices, expressions = list(indices), list(expressions)
         index_to_expr = {i: e for i, e in zip(indices, expressions)}
         keys = list(index_to_expr.keys())
-        
+
         def is_intersected(left, right):
             return left[1] > right[0]
 
@@ -136,7 +138,7 @@ class Replacer:
                 if is_intersected(left, right):
 
                     # if two of the ranges in the keys of the dictionaries overlap, pick the longer one
-                    if len(left) >= len(right):
+                    if left[1]-left[0] >= right[1]-right[0]:
                         del index_to_expr[right]
                         j +=1
                     else:
@@ -224,9 +226,10 @@ if __name__ == "__main__":
     #print(r.replace("suck"))
 
     r = NSFWReplacer()
-    print(r.replace("You suck!"))
-    print(r.replace("he was sucking lemonade through the straw"))
-    tolerances_suck = {"suck": 0.98, "sucks": 0.98, "sucked": 0.98, "sucking": 0.98}
-    r = NSFWReplacer(tolerances=tolerances_suck)
-    print(r.replace("You suck!"))
-    print(r.replace("he was sucking lemonade through the straw"))
+    #print(r.replace("You suck!"))
+    #print(r.replace("he was sucking lemonade through the straw"))
+    #tolerances_suck = {"suck": 0.98, "sucks": 0.98, "sucked": 0.98, "sucking": 0.98}
+    #r = NSFWReplacer(tolerances=tolerances_suck)
+    #print(r.replace("You suck!"))
+    #print(r.replace("he was sucking lemonade through the straw"))
+    print(r.replace("fuck you you asshole"))
