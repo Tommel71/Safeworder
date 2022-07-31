@@ -68,10 +68,11 @@ class Replacer:
 
     def replace_on_index(self, text, index_to_expr): # replace the words on the indices
 
-        indices, expressions = zip(*index_to_expr.items())
-
         if not index_to_expr:
             return text
+
+        indices, expressions = zip(*index_to_expr.items())
+
 
         adjustment = 0
 
@@ -117,6 +118,9 @@ class Replacer:
     def clean_replacements(self, index_to_expr):
 
 
+        if not index_to_expr:
+            return index_to_expr
+        
         indices, expressions = zip(*index_to_expr.items())
         indices, expressions = zip(*sorted(zip(indices, expressions), key=lambda x: x[0][0]))  # sort them together
         indices, expressions = list(indices), list(expressions)
@@ -219,17 +223,17 @@ class NSFWReplacer(MultiReplacer):
 
 
 if __name__ == "__main__":
-    #r = NSFWReplacer(obscenity_mapping="../tests/obscenity.json")
-    #print(r.replace("Hey, this is a test, thisshouldbereplaced, thistoo, anotherone"))
-    #r = NSFWReplacer()
-    #print(r.replace("   It sucks so much and it sucks even more that it improves every aspect of my day because now if i stop i know i'll just start having shitty bad days again and it'll be my dumbass lazy fault with a simple fix"))
-    #print(r.replace("suck"))
+    r = NSFWReplacer(obscenity_mapping="../tests/obscenity.json")
+    print(r.replace("Hey, this is a test, thisshouldbereplaced, thistoo, anotherone"))
+    r = NSFWReplacer()
+    print(r.replace("   It sucks so much and it sucks even more that it improves every aspect of my day because now if i stop i know i'll just start having shitty bad days again and it'll be my dumbass lazy fault with a simple fix"))
+    print(r.replace("suck"))
 
     r = NSFWReplacer()
-    #print(r.replace("You suck!"))
-    #print(r.replace("he was sucking lemonade through the straw"))
-    #tolerances_suck = {"suck": 0.98, "sucks": 0.98, "sucked": 0.98, "sucking": 0.98}
-    #r = NSFWReplacer(tolerances=tolerances_suck)
-    #print(r.replace("You suck!"))
-    #print(r.replace("he was sucking lemonade through the straw"))
+    print(r.replace("You suck!"))
+    print(r.replace("he was sucking lemonade through the straw"))
+    tolerances_suck = {"suck": 0.98, "sucks": 0.98, "sucked": 0.98, "sucking": 0.98}
+    r = NSFWReplacer(tolerances=tolerances_suck)
+    print(r.replace("You suck!"))
+    print(r.replace("he was sucking lemonade through the straw"))
     print(r.replace("fuck you you asshole"))
