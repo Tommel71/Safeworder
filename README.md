@@ -1,8 +1,8 @@
 <div align="center">
 
 # 💬Safeworder❤️
+<img src="files/logo.jpg" alt="icon" width="260"/>
 
-![](files/logo.jpg)
 
 <sub><sup>Our icon was made by an AI with craiyon.com</sup></sub>
 
