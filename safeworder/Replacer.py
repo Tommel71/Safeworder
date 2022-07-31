@@ -136,8 +136,6 @@ class Replacer:
         n = len(keys)
         i = 0 # index for the intervals
         while not finished:
-            if i ==3:
-                print("aoy")
             j = 1 # how many hops to make in the next iteration
             ontothenext = False
             while not ontothenext:
