@@ -1,0 +1,5 @@
+detoxify>=0.5.0
+pandas>=1.4.3
+numpy>=1.23.0
+openpyxl>=3.0.10
+regex>=2022.7.25
