@@ -55,7 +55,7 @@ If `detoxify` does not flag the text, nothing will be replaced. Some words have 
 ```
 
 print(r.replace("You suck!"))
->>> ('he was inhaling lemonade through the straw', {(7, 14): 'inhaling'})
+>>> ('You inhale!', {(4, 8): 'inhale'})
 print(r.replace("he was sucking lemonade through the straw"))
 >>> ('he was inhaling lemonade through the straw', {(7, 14): 'inhaling'})
 ```
