@@ -66,6 +66,8 @@ class Replacer:
         else:
             raise Exception("File type not supported")
 
+        return
+
     def replace_on_index(self, text, index_to_expr): # replace the words on the indices
 
         if not index_to_expr:
@@ -118,9 +120,9 @@ class Replacer:
     def clean_replacements(self, index_to_expr):
 
 
-        if not index_to_expr:
+        if len(index_to_expr)<=1:
             return index_to_expr
-        
+
         indices, expressions = zip(*index_to_expr.items())
         indices, expressions = zip(*sorted(zip(indices, expressions), key=lambda x: x[0][0]))  # sort them together
         indices, expressions = list(indices), list(expressions)
@@ -132,9 +134,10 @@ class Replacer:
 
         finished = False
         n = len(keys)
-        k = 0 # counts how many have been eliminated
         i = 0 # index for the intervals
         while not finished:
+            if i ==3:
+                print("aoy")
             j = 1 # how many hops to make in the next iteration
             ontothenext = False
             while not ontothenext:
@@ -144,17 +147,18 @@ class Replacer:
                     # if two of the ranges in the keys of the dictionaries overlap, pick the longer one
                     if left[1]-left[0] >= right[1]-right[0]:
                         del index_to_expr[right]
-                        j +=1
+                        j += 1
+                        if i+j >= n:
+                            ontothenext = True
                     else:
                         del index_to_expr[left]
                         ontothenext = True
-                    k += 1
                 else:
                     ontothenext=True
 
             i += j
 
-            finished = i >= n-k
+            finished = i+j >= n - 1
 
         return index_to_expr
 
@@ -224,7 +228,7 @@ class NSFWReplacer(MultiReplacer):
 
 if __name__ == "__main__":
     r = NSFWReplacer(obscenity_mapping="../tests/obscenity.json")
-    print(r.replace("Hey, this is a test, thisshouldbereplaced, thistoo, anotherone"))
+    print(r.replace("Hey, this is a test, thisshouldbereplaced, thistoo, anotherone, fucking fuck to make it obescene and trigger"))
     r = NSFWReplacer()
     print(r.replace("   It sucks so much and it sucks even more that it improves every aspect of my day because now if i stop i know i'll just start having shitty bad days again and it'll be my dumbass lazy fault with a simple fix"))
     print(r.replace("suck"))
@@ -237,3 +241,4 @@ if __name__ == "__main__":
     print(r.replace("You suck!"))
     print(r.replace("he was sucking lemonade through the straw"))
     print(r.replace("fuck you you asshole"))
+    print(r.replace("People who haven't pooped in 2019 yet, why are you still holding on to last years shit?"))
