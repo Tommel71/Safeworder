@@ -8,10 +8,12 @@ setup(
     name="safeworder",
     version="1.0.0",
     description="Replace dirty strings with clean ones",
+    license='MIT',
     author="Tommel",
     package_data={
       'safeworder': ['*'],
     },
+    url="https://github.com/Tommel71/safeworder",
     zip_safe=False,
     include_package_data=True,
     packages=find_packages(),

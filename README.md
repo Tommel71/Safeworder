@@ -6,7 +6,7 @@
 
 <sub><sup>Our icon was made by an AI with craiyon.com</sup></sub>
 
-Safeworder is a dictionary-based rephrasing tool built on top of `detoxify` and and not only detects sensitive expressions but also replaces them with either the standard safe replacement expressions of `safeworder` or user specified ones. This helps removing or replacing profanity.
+### Safeworder is a dictionary-based rephrasing tool built on top of `detoxify` and and not only detects sensitive expressions but also replaces them with either the standard safe replacement expressions of `safeworder` or user specified ones. This helps removing or replacing profanity.
 
 </div>
 

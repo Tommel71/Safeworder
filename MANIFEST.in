@@ -1,1 +1,2 @@
 global-include *.xlsx
+global-include *.json

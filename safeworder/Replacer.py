@@ -71,9 +71,6 @@ class Replacer:
         if not index_to_expr:
             return text
 
-        indices, expressions = zip(*index_to_expr.items())
-        indices, expressions = zip(*sorted(zip(indices, expressions), key=lambda x: x[0][0]))  # sort them together
-        indices, expressions = list(indices), list(expressions)
         adjustment = 0
 
         for i in range(len(indices)):
@@ -115,9 +112,50 @@ class Replacer:
 
         return index_to_expr
 
+    def clean_replacements(self, index_to_expr):
+
+
+        indices, expressions = zip(*index_to_expr.items())
+        indices, expressions = zip(*sorted(zip(indices, expressions), key=lambda x: x[0][0]))  # sort them together
+        indices, expressions = list(indices), list(expressions)
+        index_to_expr = {i: e for i, e in zip(indices, expressions)}
+        keys = list(index_to_expr.keys())
+        
+        def is_intersected(left, right):
+            return left[1] > right[0]
+
+        finished = False
+        n = len(keys)
+        k = 0 # counts how many have been eliminated
+        i = 0 # index for the intervals
+        while not finished:
+            j = 1 # how many hops to make in the next iteration
+            ontothenext = False
+            while not ontothenext:
+                left, right = keys[i], keys[i+j]
+                if is_intersected(left, right):
+
+                    # if two of the ranges in the keys of the dictionaries overlap, pick the longer one
+                    if len(left) >= len(right):
+                        del index_to_expr[right]
+                        j +=1
+                    else:
+                        del index_to_expr[left]
+                        ontothenext = True
+                    k += 1
+                else:
+                    ontothenext=True
+
+            i += j
+
+            finished = i >= n-k
+
+        return index_to_expr
+
     def replace(self, text):
         index_to_expr = {}
         index_to_expr = self.select_substitutions(text, index_to_expr)
+        index_to_expr = self.clean_replacements(index_to_expr)
         text = self.replace_on_index(text, index_to_expr)
         return text, index_to_expr
 
