@@ -6,7 +6,7 @@ with open('requirements.txt') as f:
 
 setup(
     name="safeworder",
-    version="1.0.1",
+    version="1.0.2",
     description="Replace dirty strings with clean ones",
     license='MIT',
     author="Tommel",
