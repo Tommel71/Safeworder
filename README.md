@@ -10,13 +10,26 @@
 
 </div>
 
+
 ## Performance
 
-Downloading evaluation data from reddit and evaluating it in `main.py` results in the following graphs which show that the judgement mechanism in use - `detoxify` - rates the replaced texts as much less toxic and obscene.
+Downloading evaluation data from reddit and evaluating it 
+in `main.py` results in the following graphs which show that the 
+judgement mechanism in use - `detoxify` - rates the texts 
+as much less toxic and obscene after `safeworder` has been applied
 
 Less obscene subreddit             |  Obscene subreddit
 :-------------------------:|:-------------------------:
 ![](files/askreddit_results.png)  |  ![](files/sexstories_results.png)
+
+## When to use
+
+Use this tool if you want to replace nsfw, profane, toxic, offensive words or expressions with a
+more appropriate content. You can use it out of the box or customize it to your needs.
+In some cases you may want to not just replace the words with characters like `*` or `-`. This
+package allows you to replace the words with any other expression you want. 
+You will also get the indices of where replacement happens which allows you to
+highlight, replace, remove or alter the words in the original text.
 
 
 ## How to install
@@ -53,7 +66,6 @@ rp = NSFWReplacer(obscenity_replacement = file1, toxicity_replacement=file2)
 If `detoxify` does not flag the text, nothing will be replaced. Some words have a negative connotation in general from how `detoxify` was trained, but in everyday use the word does not have to be profane. Here is how to offset this higher baseline suspicion of the model.
 
 ```
-
 print(r.replace("You suck!"))
 >>> ('You inhale!', {(4, 8): 'inhale'})
 print(r.replace("he was sucking lemonade through the straw"))
