@@ -56,9 +56,9 @@ As a return value you get a tuple of the safer text and a dictionary containing 
 Either create an excel (`.xlsx`) file that and in the table `Sheet1` specify the safe expressions in the first row that expressions in the same column should be replaced with, or use a `json` file that maps each safe expression to a list of its unsafe counterparts. Have a look at `safeworder/mappings/` or `tests/obscenity.json` for reference and use the following code to replace the toxicity and obscenity dictionary respectively.
 ```
 from safeworder import NSFWReplacer
-obscenity_replacement = "obsc.json" 
-toxicity_replacement = "toxic.xlsx"
-rp = NSFWReplacer(obscenity_replacement = file1, toxicity_replacement=file2)
+orep = "obsc.json" 
+trep = "toxic.xlsx"
+rp = NSFWReplacer(obscenity_replacement=orep, toxicity_replacement=trep)
 ```
 
 ## Changing the sensitivity
